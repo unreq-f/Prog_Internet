@@ -33,11 +33,10 @@ class Storage:
         missed_hours_width = len(f'{'Всього':^{max_missed_len}} | {'Виправдано':^{max_valid_len}}')
         absences_width = len(f'{'У годинах':^{max_count_len}} | {'У %':^{max_percent_len}}')
 
+        print("Відомість відвідування занять студентами:")
 
-        print("Відомість відвідування занять студентами:\n")
-
-        header_1 = f"{'Прізвище':<{max_name_len}} | {'Пропущено годин':^{missed_hours_width}} | {'Пропуски':^{absences_width}}  |"
-        header_2 = f"{'':<{max(max_name_len, 8)}} | {'Всього':^{max_missed_len}} | {'Виправдано':^{max_valid_len}} | {'У годинах':^{max_count_len}} | {'У %':^{max_percent_len}}  |"
+        header_1 = f"| {'Прізвище':<{max_name_len}} | {'Пропущено годин':^{missed_hours_width}} | {'Пропуски':^{absences_width}}  |"
+        header_2 = f"|{'':<{max(max_name_len, 9)}}  | {'Всього':^{max_missed_len}} | {'Виправдано':^{max_valid_len}} | {'У годинах':^{max_count_len}} | {'У %':^{max_percent_len}}  |"
         print("-" * len(header_1))
         print(header_1)
         print(header_2)
@@ -46,7 +45,7 @@ class Storage:
         # Данные
         for record in self.storage_list:
             print(
-                f"{record.student_f:<{max(8,max_name_len)}} | "
+                f"| {record.student_f:<{max(8,max_name_len)}} | "
                 f"{record.missedh:^{max(6,max_missed_len)}} | "
                 f"{record.valid_reason_h:^{max(10, max_valid_len)}} | "
                 f"{record.count:^{max(9,max_count_len)}} | "
@@ -57,6 +56,6 @@ class Storage:
 
 
 storage = Storage()
-storage.add_record("Івkhuhhg", 1097786875, 0)
-storage.add_record("Пе", 8, 2)
+storage.add_record("Человек1", 10977865, 0)
+storage.add_record("Студент студентович", 8, 2)
 storage.display_table()
