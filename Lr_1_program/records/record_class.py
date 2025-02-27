@@ -26,4 +26,8 @@ class Record:
     def percentage(self):
         return self._percentage
 
+    def __str__(self):
+        return f"| {self._student_f} | {self._missedh} | {self._count} | {self._percentage:.2f}% |"
+
+
 
