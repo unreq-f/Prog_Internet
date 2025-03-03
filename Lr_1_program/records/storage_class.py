@@ -1,4 +1,4 @@
-from record_class import Record
+from records.record_class import Record
 
 class Storage:
     def __init__(self):
@@ -21,9 +21,9 @@ class Storage:
         else:
             print("Ошибка: индекс вне диапазона.")
 
-
     def display_table(self):
         """Выводит ведомость посещаемости в табличном формате."""
+        max_index_len = len(str(len(self.storage_list)))  # Длина номера записи
         max_name_len = max(len(record.student_f) for record in self.storage_list)
         max_missed_len = max(len(str(record.missedh)) for record in self.storage_list)
         max_valid_len = max(len(str(record.valid_reason_h)) for record in self.storage_list)
@@ -35,27 +35,31 @@ class Storage:
 
         print("Відомість відвідування занять студентами:")
 
-        header_1 = f"| {'Прізвище':<{max_name_len}} | {'Пропущено годин':^{missed_hours_width}} | {'Пропуски':^{absences_width}}  |"
-        header_2 = f"|{'':<{max(max_name_len, 9)}}  | {'Всього':^{max_missed_len}} | {'Виправдано':^{max_valid_len}} | {'У годинах':^{max_count_len}} | {'У %':^{max_percent_len}}  |"
+        header_1 = (
+            f"| {'№':<{max_index_len}} | {'Прізвище':<{max_name_len}} | "
+            f"{'Пропущено годин':^{missed_hours_width}} | {'Пропуски':^{absences_width}}  |"
+        )
+        header_2 = (
+            f"|{'':<{max_index_len}} |{'':<{max(max_name_len, 9)}}  | "
+            f"{'Всього':^{max_missed_len}} | {'Виправдано':^{max_valid_len}} | "
+            f"{'У годинах':^{max_count_len}} | {'У %':^{max_percent_len}}  |"
+        )
+
         print("-" * len(header_1))
         print(header_1)
         print(header_2)
         print("-" * len(header_1))
 
         # Данные
-        for record in self.storage_list:
+        for i, record in enumerate(self.storage_list, start=1):
             print(
-                f"| {record.student_f:<{max(8,max_name_len)}} | "
-                f"{record.missedh:^{max(6,max_missed_len)}} | "
+                f"| {i:<{max_index_len}} | {record.student_f:<{max(8, max_name_len)}} | "
+                f"{record.missedh:^{max(6, max_missed_len)}} | "
                 f"{record.valid_reason_h:^{max(10, max_valid_len)}} | "
-                f"{record.count:^{max(9,max_count_len)}} | "
+                f"{record.count:^{max(9, max_count_len)}} | "
                 f"{record.percentage:^{max_percent_len}.2f}% |"
             )
 
         print("-" * len(header_1))
 
 
-storage = Storage()
-storage.add_record("Человек1", 10977865, 0)
-storage.add_record("Студент студентович", 8, 2)
-storage.display_table()
