@@ -6,24 +6,24 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 
-# Загрузка переменных окружения
+# Завантаження змінних env
 def send_log_email():
-    """Отправляет лог-файл с действиями пользователя на почту."""
+    """Відправка логів на пошту"""
     load_dotenv()
 
-    # Настройки SMTP
+    # Налаштування SMTP
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
 
-    # Получение учетных данных из .env
+
     username = os.getenv("SENDER_EMAIL")
     password = os.getenv("EMAIL_PASSWORD")
     recipient_email = os.getenv("RECEPIENT_EMAIL")
 
-    # Путь к лог-файлу
+
     log_file_path = "user_action.log"
 
-    # Создание сообщения
+#створення повідомлення
     msg = MIMEMultipart()
     msg["From"] = username
     msg["To"] = recipient_email
@@ -47,7 +47,7 @@ def send_log_email():
             server.starttls()  # Защищенное соединение
             server.login(username, password)  # Авторизация
             server.send_message(msg)  # Отправка письма
-            print("✅ Лог-файл успешно отправлен!")
+            print("✅ Лог-файл успішно відправлено!")
     except Exception as e:
-        print(f"❌ Ошибка отправки письма: {e}")
+        print(f"❌ Помилка відправки листа: {e}")
 

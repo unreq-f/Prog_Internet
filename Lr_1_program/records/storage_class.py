@@ -12,14 +12,14 @@ class Storage:
         if 0 <= index < len(self.storage_list):
             del self.storage_list[index]
         else:
-            print("Ошибка: индекс вне диапазона.")
+            print("Помилка: Індекс поза діапазоном")
 
 
     def update_record(self, index: int, student_f: str, missedh: int = 0, valid_reason_h: int = 0):
         if 0 <= index < len(self.storage_list):
             self.storage_list[index] = Record(student_f, missedh, valid_reason_h)
         else:
-            print("Ошибка: индекс вне диапазона.")
+            print("Помилка: Індекс поза діапазоном")
 
     def display_table(self):
         """Выводит ведомость посещаемости в табличном формате."""

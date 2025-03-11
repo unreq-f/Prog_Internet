@@ -10,10 +10,10 @@ def log_action(action: str):
     logging.info(action)
 
 def log_error(error_message):
-    """Логирование ошибки пользователя."""
+    """Логування помилок"""
     logging.error(error_message)
 
 
 def log_warning(warning_message):
-    """Логирование предупреждений (не критических ошибок)."""
+    """Логування попереджень"""
     logging.warning(warning_message)
